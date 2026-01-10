@@ -1,17 +1,103 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Arrow | Syllabus</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arrow | Career Syllabus</title>
+  
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+    body { font-family: 'Poppins', sans-serif; background: #f3f4f6; margin: 0; padding: 20px; }
+    .syllabus-container { max-width: 800px; margin: 40px auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+    .back-btn { display: inline-block; margin-bottom: 20px; color: #2563eb; text-decoration: none; font-weight: 600; cursor: pointer; }
+    h1 { color: #1e293b; margin-top: 0; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
+    .section { margin-top: 25px; padding: 20px; background: #f8fafc; border-left: 5px solid #2563eb; border-radius: 0 10px 10px 0; }
+    .section-title { font-weight: 600; color: #2563eb; font-size: 1.1rem; margin-bottom: 10px; display: block; }
+    .topic-list { margin: 0; padding-left: 20px; color: #475569; line-height: 1.7; }
+    .error-msg { text-align: center; padding: 50px; }
+  </style>
 </head>
 <body>
-<h2>MBBS Syllabus</h2>
-<ul>
-<li>Anatomy</li>
-<li>Physiology</li>
-<li>Biochemistry</li>
-<li>Pathology</li>
-</ul>
+
+  <div class="syllabus-container">
+    <a href="javascript:history.back()" class="back-btn"><i class="fas fa-chevron-left"></i> Back to Careers</a>
+    
+    <div id="syllabusContent">
+      </div>
+  </div>
+
+  <script>
+    // 1. Get the career name saved from the previous page
+    const selectedCareer = localStorage.getItem("selectedCareer");
+
+    // 2. The Syllabus Database
+    const syllabusDatabase = {
+      "Doctor": [
+        { label: "Phase 1: Pre-Clinical", topics: "Anatomy, Physiology, Biochemistry" },
+        { label: "Phase 2: Para-Clinical", topics: "Pathology, Microbiology, Pharmacology, Forensic Medicine" },
+        { label: "Phase 3: Clinical", topics: "Medicine, Surgery, Pediatrics, ENT, Ophthalmology, OBG" }
+      ],
+      "Engineer": [
+        { label: "Year 1: Foundation", topics: "Engineering Mathematics, Physics, Mechanics, Programming Basics" },
+        { label: "Year 2 & 3: Core", topics: "Branch specific subjects (Data Structures, Circuits, or Thermodynamics)" },
+        { label: "Year 4: Final", topics: "Specialized Electives, Industrial Internship, Major Project" }
+      ],
+      "Lawyer": [
+        { label: "Foundation", topics: "Constitutional Law, Law of Contracts, Torts, Legal Writing" },
+        { label: "Core Law", topics: "Criminal Law (IPC), Family Law, Evidence Act, Jurisprudence" },
+        { label: "Specialization", topics: "Corporate Law, IP Rights, Labor Law, Professional Ethics" }
+      ],
+      "CA": [
+        { label: "CA Foundation", topics: "Accounting, Business Laws, Maths, Economics" },
+        { label: "CA Intermediate", topics: "Taxation, Costing, Auditing, Advanced Accounting" },
+        { label: "CA Final", topics: "Financial Reporting, Strategic Mgmt, Advanced Audit, Corporate Laws" }
+      ],
+      "CMA": [
+        { label: "Foundation", topics: "Business Laws, Fundamentals of Accounting, Maths" },
+        { label: "Intermediate", topics: "Operations Management, Strategic Planning, Direct & Indirect Tax" },
+        { label: "Final", topics: "Cost Audit, Strategic Financial Management, Corporate Laws" }
+      ],
+      "ACCA": [
+        { label: "Applied Knowledge", topics: "Business & Tech, Management Accounting, Financial Accounting" },
+        { label: "Applied Skills", topics: "Law, Performance Management, Taxation, Financial Reporting, Audit" },
+        { label: "Strategic Professional", topics: "Strategic Business Leader, Strategic Business Reporting" }
+      ],
+      "Journalist": [
+        { label: "Basics", topics: "Introduction to Journalism, Media Laws, Communication Skills" },
+        { label: "Reporting", topics: "News Writing, Editing, Investigative Journalism, Photography" },
+        { label: "Digital Media", topics: "Social Media Marketing, Video Editing, Ethics in Mass Media" }
+      ]
+    };
+
+    const contentArea = document.getElementById("syllabusContent");
+
+    // 3. Logic: Show ONLY the syllabus for the selected career
+    if (selectedCareer && syllabusDatabase[selectedCareer]) {
+      let html = `<h1>${selectedCareer} Syllabus</h1>`;
+      
+      syllabusDatabase[selectedCareer].forEach(step => {
+        html += `
+          <div class="section">
+            <span class="section-title">${step.label}</span>
+            <ul class="topic-list">
+              <li>${step.topics}</li>
+            </ul>
+          </div>
+        `;
+      });
+      
+      contentArea.innerHTML = html;
+    } else {
+      contentArea.innerHTML = `
+        <div class="error-msg">
+          <h2>No Syllabus Found</h2>
+          <p>Please go back and select a career option.</p>
+        </div>
+      `;
+    }
+  </script>
 </body>
 </html>
