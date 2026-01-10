@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Arrow | Careers</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="menu" onclick="toggle()">☰</div>
+<div class="sidebar" id="side">
+  <a href="colleges.html">Best Colleges</a>
+  <a href="experts.html">Experts</a>
+  <a href="#">Benchmark Analysis</a>
+  <a href="#">Skill Set</a>
+  <a href="#">Hiring Companies</a>
+  <a href="#">Help</a>
+</div>
+
+<div class="content">
+  <h2>Doctor</h2>
+  <p>Qualification: Plus Two with Science</p>
+  <button onclick="location.href='syllabus.html'">View Syllabus</button>
+</div>
+
+<script>
+function toggle(){
+ document.getElementById("side").classList.toggle("show");
+}
+</script>
+</body>
+</html>

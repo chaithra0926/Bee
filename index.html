@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arrow | Login</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body class="center">
+  <div class="login-container">
+    <div class="card">
+      <div class="logo">🏹</div>
+      <h2>Welcome Back</h2>
+      <p>Please enter your details to sign in.</p>
+      
+      <div class="input-group">
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Password" required>
+      </div>
+
+      <button onclick="login()" class="login-btn">Sign In</button>
+      
+      <div class="footer-links">
+        <a href="#">Forgot password?</a>
+        <span>Don't have an account? <a href="#">Sign up</a></span>
+      </div>
+    </div>
+  </div>
+
+  <script src="firebase.js"></script>
+  <script src="auth.js"></script>
+</body>
+</html>
