@@ -1,0 +1,68 @@
+/* 1. Global Reset & Variables */
+:root {
+  --primary-color: #333;
+  --accent-color: #ff4757; /* A nice coral red for logout */
+  --accent-hover: #e84148;
+  --bg-color: #f0f2f5;
+  --text-color: #2f3542;
+  --font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 2. Body Styling - Centers content on screen */
+body {
+  font-family: var(--font-stack);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  height: 100vh; /* Full viewport height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 3. Heading Styling */
+h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  /* Overriding inline style just in case */
+  margin-top: 0 !important; 
+}
+
+/* 4. Paragraph Styling */
+p {
+  font-size: 1.1rem;
+  color: #57606f;
+  margin-bottom: 2rem;
+}
+
+/* 5. Button Styling */
+button {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-2px); /* Slight lift effect */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+button:active {
+  transform: translateY(0);
+}

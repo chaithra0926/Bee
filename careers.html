@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arrow | Careers</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+  <!-- MENU BUTTON -->
+  <div class="menu-btn" onclick="toggle()">
+    <i class="fas fa-bars"></i>
+  </div>
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar" id="side">
+    <div class="sidebar-header">
+      <h3>Arrow</h3>
+    </div>
+    <div class="nav-links">
+      <a href="colleges.html"><i class="fas fa-university"></i> Best Colleges</a>
+      <a href="experts.html"><i class="fas fa-user-tie"></i> Experts</a>
+      <a href="#"><i class="fas fa-chart-line"></i> Benchmark Analysis</a>
+      <a href="#"><i class="fas fa-lightbulb"></i> Skill Set</a>
+      <a href="#"><i class="fas fa-building"></i> Hiring Companies</a>
+      <a href="#"><i class="fas fa-question-circle"></i> Help</a>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="content" id="careerContainer">
+    <!-- Career cards will be injected here -->
+  </main>
+
+  <!-- SCRIPT -->
+  <script>
+    // Sidebar toggle
+    function toggle() {
+      document.getElementById("side").classList.toggle("show");
+    }
+
+    // Get selected category
+    const category = localStorage.getItem("selectedCategory");
+
+    // Career data (LOGIC)
+    const careerData = {
+      arts: [
+        {
+          title: "Lawyer",
+          qualification: "Plus Two + Law Degree",
+          description: "Work in courts, legal firms, and corporate law sectors."
+        },
+        {
+          title: "Journalist",
+          qualification: "Any Degree in Media / Journalism",
+          description: "Reporting, writing, and mass media communication."
+        }
+      ],
+      science: [
+        {
+          title: "Doctor",
+          qualification: "Plus Two with Science (PCB)",
+          description: "Help save lives and contribute to medical science."
+        },
+        {
+          title: "Engineer",
+          qualification: "Plus Two with Science (PCM)",
+          description: "Design, build, and innovate engineering solutions."
+        }
+      ],
+      commerce: [
+        {
+          title: "CA",
+          qualification: "Plus Two (Any Stream)",
+          description: "Chartered Accountant specializing in finance and taxation."
+        },
+        {
+          title: "CMA",
+          qualification: "Plus Two (Any Stream)",
+          description: "Cost and Management Accounting professional."
+        },
+        {
+          title: "ACCA",
+          qualification: "Plus Two (Any Stream)",
+          description: "International accounting and finance qualification."
+        }
+      ]
+    };
+
+    const container = document.getElementById("careerContainer");
+
+    // Safety check
+    if (!category || !careerData[category]) {
+      container.innerHTML = "<h2 style='padding:20px'>No category selected</h2>";
+    } else {
+      careerData[category].forEach(career => {
+        const card = document.createElement("div");
+        card.className = "career-card";
+
+        card.innerHTML = `
+          <div class="badge">Career Option</div>
+          <h2>${career.title}</h2>
+          <p class="qualification">
+            <strong>Minimum Qualification:</strong> ${career.qualification}
+          </p>
+          <p class="description">${career.description}</p>
+          <button class="cta-button">
+            View Syllabus <i class="fas fa-arrow-right"></i>
+          </button>
+        `;
+
+        // Button click logic
+        card.querySelector(".cta-button").onclick = () => {
+          localStorage.setItem("selectedCareer", career.title);
+          window.location.href = "syllabus.html";
+        };
+
+        container.appendChild(card);
+      });
+    }
+  </script>
+
+</body>
+</html>

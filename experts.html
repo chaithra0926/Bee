@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arrow | Career Experts</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --bg: #f3f4f6;
+    }
+    body { font-family: 'Poppins', sans-serif; background: var(--bg); margin: 0; padding: 20px; }
+    
+    .container { max-width: 1100px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 30px; }
+
+    /* Tab Styles */
+    .tabs-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+    .tab-btn {
+      padding: 12px 24px;
+      border: none;
+      background: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .tab-btn.active {
+      background: var(--primary);
+      color: white;
+    }
+    .tab-btn:hover:not(.active) {
+      background: #e2e8f0;
+    }
+
+    /* Grid for Cards */
+    .experts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+    }
+
+    /* Card Design */
+    .expert-card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+      animation: fadeIn 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+    .icon-box { 
+      width: 50px; height: 50px; background: #eff6ff; 
+      border-radius: 10px; display: flex; align-items: center; 
+      justify-content: center; color: var(--primary); font-size: 1.5rem;
+    }
+    
+    .expert-name { margin: 0; font-size: 1.1rem; font-weight: 600; }
+    .expert-field { color: #64748b; font-size: 0.85rem; font-weight: 500; }
+
+    .contact-item { 
+      display: flex; align-items: center; gap: 10px; 
+      margin-top: 10px; font-size: 0.9rem; color: #334155; 
+    }
+    .contact-item i { color: #10b981; width: 15px; }
+
+    .btn-call {
+      display: inline-block; width: 100%; text-align: center;
+      margin-top: 20px; padding: 10px; background: var(--primary);
+      color: white; text-decoration: none; border-radius: 8px; font-weight: 500;
+      transition: opacity 0.2s;
+    }
+    .btn-call:hover { opacity: 0.9; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>Career Expert Directory</h1>
+    <p>Select a category to connect with verified professionals</p>
+  </header>
+
+  <div class="tabs-container" id="tabs">
+    <button class="tab-btn active" onclick="filterField('All')">All</button>
+    <button class="tab-btn" onclick="filterField('Doctor')">Doctors</button>
+    <button class="tab-btn" onclick="filterField('Engineer')">Engineers</button>
+    <button class="tab-btn" onclick="filterField('CA/ACCA')">CA / ACCA / CMA</button>
+    <button class="tab-btn" onclick="filterField('Lawyer')">Lawyers</button>
+    <button class="tab-btn" onclick="filterField('Teacher')">Teachers</button>
+  </div>
+
+  <div class="experts-grid" id="expertDisplay">
+    </div>
+</div>
+
+<script>
+  const experts = [
+    // DOCTORS
+    { name: "Dr. Anil Kumar", field: "Doctor", sub: "Senior Surgeon", phone: "+91 98765 43210", icon: "fa-user-md" },
+    { name: "Dr. Priya Roy", field: "Doctor", sub: "Neurologist", phone: "+91 91234 56789", icon: "fa-brain" },
+    { name: "Dr. Sameer Khan", field: "Doctor", sub: "Pediatrician", phone: "+91 98221 33445", icon: "fa-baby" },
+    { name: "Dr. Shalini Singh", field: "Doctor", sub: "Cardiologist", phone: "+91 97766 55443", icon: "fa-heart-pulse" },
+    { name: "Dr. Amit Verma", field: "Doctor", sub: "Dermatologist", phone: "+91 94433 22110", icon: "fa-stethoscope" },
+    { name: "Dr. Kavita Rao", field: "Doctor", sub: "Gynecologist", phone: "+91 91122 33445", icon: "fa-person-breastfeeding" },
+
+    // ENGINEERS
+    { name: "Sarah Jenkins", field: "Engineer", sub: "Software Architect", phone: "+91 88877 66554", icon: "fa-laptop-code" },
+    { name: "Arjun V.", field: "Engineer", sub: "Civil Engineer", phone: "+91 93344 55667", icon: "fa-helmet-safety" },
+    { name: "Vikram Seth", field: "Engineer", sub: "Mechanical Lead", phone: "+91 95566 77889", icon: "fa-gears" },
+    { name: "Neha Sharma", field: "Engineer", sub: "Electrical Engineer", phone: "+91 92211 00998", icon: "fa-bolt" },
+    { name: "Rohan Das", field: "Engineer", sub: "Data Scientist", phone: "+91 87766 55443", icon: "fa-microchip" },
+    { name: "Ayesha Khan", field: "Engineer", sub: "Aerospace Engineer", phone: "+91 91100 22334", icon: "fa-plane" },
+
+    // CA/ACCA/CMA
+    { name: "M. Rahul", field: "CA/ACCA", sub: "Chartered Accountant", phone: "+91 90000 11122", icon: "fa-calculator" },
+    { name: "Kevin Smith", field: "CA/ACCA", sub: "CMA Expert", phone: "+91 82233 44556", icon: "fa-file-invoice-dollar" },
+    { name: "Suresh Iyer", field: "CA/ACCA", sub: "Tax Audit Specialist", phone: "+91 98877 66551", icon: "fa-coins" },
+    { name: "Ananya Goel", field: "CA/ACCA", sub: "ACCA Consultant", phone: "+91 94455 66778", icon: "fa-chart-line" },
+    { name: "Zaid Ahmed", field: "CA/ACCA", sub: "Financial Analyst", phone: "+91 81122 33440", icon: "fa-landmark" },
+    { name: "Ritu Kapoor", field: "CA/ACCA", sub: "Cost Accountant", phone: "+91 92233 11009", icon: "fa-file-contract" },
+
+    // LAWYERS
+    { name: "Adv. Meera J.", field: "Lawyer", sub: "Corporate Law", phone: "+91 77766 55544", icon: "fa-gavel" },
+    { name: "Adv. Rahul Bose", field: "Lawyer", sub: "Criminal Defense", phone: "+91 98811 22334", icon: "fa-scale-balanced" },
+    { name: "Adv. Sania Mirza", field: "Lawyer", sub: "Family Law", phone: "+91 91122 88776", icon: "fa-users-rectangle" },
+    { name: "Adv. Kabir Singh", field: "Lawyer", sub: "IP Rights Expert", phone: "+91 95544 33221", icon: "fa-lightbulb" },
+    { name: "Adv. Pooja Hegde", field: "Lawyer", sub: "Labor Law", phone: "+91 90088 77665", icon: "fa-briefcase" },
+    { name: "Adv. Deepak Jaitly", field: "Lawyer", sub: "Civil Litigation", phone: "+91 81199 00112", icon: "fa-building-columns" },
+
+    // TEACHERS
+    { name: "Prof. David", field: "Teacher", sub: "Physics Specialist", phone: "+91 99988 77766", icon: "fa-chalkboard-user" },
+    { name: "Mrs. Shanthi", field: "Teacher", sub: "Mathematics HOD", phone: "+91 91100 44556", icon: "fa-plus-minus" },
+    { name: "Dr. Rajeshwari", field: "Teacher", sub: "Biology Professor", phone: "+91 94477 88990", icon: "fa-dna" },
+    { name: "Mr. Thomas", field: "Teacher", sub: "English Literature", phone: "+91 80011 22334", icon: "fa-book" },
+    { name: "Ms. Monica", field: "Teacher", sub: "Computer Science", phone: "+91 91122 44335", icon: "fa-display" },
+    { name: "Mr. Harish", field: "Teacher", sub: "History Expert", phone: "+91 97755 33110", icon: "fa-monument" }
+  ];
+
+  function filterField(category) {
+    const buttons = document.querySelectorAll('.tab-btn');
+    buttons.forEach(btn => {
+      btn.classList.remove('active');
+      // Logic to handle matching display names with category data
+      if(btn.innerText.includes(category) || (category === 'All' && btn.innerText === 'All')) {
+        btn.classList.add('active');
+      }
+    });
+
+    const display = document.getElementById('expertDisplay');
+    display.innerHTML = ''; 
+
+    const filtered = category === 'All' 
+      ? experts 
+      : experts.filter(exp => exp.field === category);
+
+    filtered.forEach(exp => {
+      display.innerHTML += `
+        <div class="expert-card">
+          <div class="card-header">
+            <div class="icon-box"><i class="fas ${exp.icon}"></i></div>
+            <div>
+              <h3 class="expert-name">${exp.name}</h3>
+              <span class="expert-field">${exp.sub}</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <span>${exp.phone}</span>
+          </div>
+          <a href="tel:${exp.phone}" class="btn-call">Contact Now</a>
+        </div>
+      `;
+    });
+  }
+
+  // Initial load
+  filterField('All');
+</script>
+
+</body>
+</html>
