@@ -1,17 +1,24 @@
-
 <!DOCTYPE html>
 <html>
 <head>
   <title>Arrow | Categories</title>
-  <link rel="stylesheet" href="style.css">
 </head>
-<body class="category-page">
-<div class="user-logo">👤</div>
-<div class="category arts" onclick="go('arts')">Arts</div>
-<div class="category science" onclick="go('science')">Science</div>
-<div class="category commerce" onclick="go('commerce')">Commerce</div>
-<script>
-function go(c){ location.href='careers.html?cat='+c; }
-</script>
+
+<body>
+
+  <h2>Choose Category</h2>
+
+  <div onclick="selectCategory('arts')">Arts</div>
+  <div onclick="selectCategory('science')">Science</div>
+  <div onclick="selectCategory('commerce')">Commerce</div>
+
+  <script>
+    function selectCategory(category) {
+      alert("Clicked: " + category);   // 👈 DEBUG LINE
+      localStorage.setItem("selectedCategory", category);
+      window.location.href = "careers.html";
+    }
+  </script>
+
 </body>
 </html>
