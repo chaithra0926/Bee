@@ -8,22 +8,22 @@
 
 ## 📌 Team Information
 
-- **Team Name:**  
+- **Team Name:** Bee 
 - **Team Members:**  
-  - Member 1 – Register No  
-  - Member 2 – Register No  
-  - Member 3 – Register No  
-  - Member 4 – Register No (if applicable)
+  -Anargha Krishna   
+  - Anjana C A  – Register No  
+  - Chaithra EK – Register No  
+  - Chaithra S – Register No (if applicable)
 
-- **Problem Domain:**  
-- **Selected Problem Statement:**  
+- **Problem Domain:** Challenges in career 
+- **Selected Problem Statement:** Students often choose academic paths or careers without clear understanding of industry demands required skill sets or their own competency gaps
+.This disconnect between education choices and real world expectations results skill mismatch and employability challenges for graduates.
+ 
 
 ---
 
 ## 🧩 Problem Description
 
-Briefly describe the problem you are addressing.  
-Explain the background and why this problem is relevant.
 
 ---
 
