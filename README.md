@@ -10,7 +10,7 @@
 
 - **Team Name:** Bee 
 - **Team Members:**  
-  -Anargha Krishna   
+  - Anargha Krishna   
   - Anjana C A  – Register No  
   - Chaithra EK – Register No  
   - Chaithra S – Register No (if applicable)
