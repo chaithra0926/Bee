@@ -24,15 +24,21 @@
 
 ## 🧩 Problem Description
 
-
+Many students choose their academic streams and career paths based on limited information, social influence, or outdated guidance. They often lack awareness of current industry demands, required skill sets, and their own competency levels. As a result, students may graduate with degrees that do not align with market needs, leading to skill mismatch, unemployment, or underemployment. This gap between education choices and real-world expectations creates frustration for students and inefficiency in the workforce.
 ---
 
 ## 💡 Proposed Solution
 
 Describe your solution clearly:
-- What is your approach?
-- How does it solve the problem?
-- Key idea behind the solution.
+- What is your approach? Shows required skills, industry expectations, and learning roadmaps
+
+Highlights the gap between the student’s current skills and industry needs
+- How does it solve the problem? Students receive data-driven career guidance instead of guesswork
+They clearly understand:
+What skills and academic elegibility  are needed for a chosen career
+What they need to learn next
+- Key idea behind the solution.“Right Career + Right Skills + Right Time”.The core idea is to bridge the gap between education and industry by combining:
+Student self-assessment,Industry-aligned skill requirements
 
 ---
 
