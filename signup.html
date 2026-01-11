@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Arrow | Sign Up</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="center">
+
+  <div class="login-container">
+    <div class="card">
+      <div class="logo">🏹</div>
+      <h2>Create Account</h2>
+      <p>Create your account to continue</p>
+
+      <div class="input-group">
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Password" required>
+      </div>
+
+      <button onclick="signup()" class="login-btn">Sign Up</button>
+
+      <div class="footer-links">
+        <span>Already have an account? <a href="index.html">Sign In</a></span>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="firebase.js"></script>
+  <script type="module" src="auth.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Best Colleges | Career Guidance</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- CSS (can be external later) -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: #f4f5fb;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+
+    .header h1 {
+      font-size: 26px;
+      margin-bottom: 5px;
+    }
+
+    .header p {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    /* Stream Tabs */
+    .stream-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .stream-tabs button {
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      background: #e4e7ff;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    .stream-tabs button.active {
+      background: #4b5cff;
+      color: #fff;
+    }
+
+    /* Layout */
+    .main-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .main-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Sidebar */
+    .side-tab {
+      background: #f8f9ff;
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid #e0e3ff;
+    }
+
+    .side-tab h3 {
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+
+    .sidebar-college {
+      background: #fff;
+      border: 1px solid #e0e3ff;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 8px;
+    }
+
+    .sidebar-college h4 {
+      font-size: 15px;
+    }
+
+    .sidebar-college p {
+      font-size: 13px;
+      color: #666;
+    }
+
+    /* College cards */
+    .college-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .college-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f9f9ff;
+      border-radius: 10px;
+      padding: 14px;
+      border: 1px solid #e0e3ff;
+    }
+
+    .rank {
+      background: #4b5cff;
+      color: #fff;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+    }
+
+    .college-info {
+      flex: 1;
+      margin-left: 12px;
+    }
+
+    .college-info h3 {
+      font-size: 16px;
+    }
+
+    .college-info span {
+      font-size: 13px;
+      color: #666;
+    }
+
+    .college-info p {
+      font-size: 13px;
+      color: #444;
+      margin-top: 4px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .view-btn {
+      background: #4b5cff;
+      color: #fff;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .save-btn {
+      border: 1px solid #4b5cff;
+      background: #fff;
+      color: #4b5cff;
+      border-radius: 6px;
+      padding: 6px 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>Best Colleges</h1>
+    <p>Select a stream to see top colleges and career opportunities.</p>
+  </div>
+<div class="stream-tabs" id="categoryTabs">
+  <!-- JS will inject category buttons -->
+</div>
+
+  <!-- Stream Tabs -->
+  <div class="stream-tabs">
+    <button class="tab-btn active" data-stream="arts">Arts</button>
+    <button class="tab-btn" data-stream="commerce">Commerce</button>
+    <button class="tab-btn" data-stream="science">Science</button>
+  </div>
+<div class="stream-tabs" id="categoryTabs">
+  <!-- JS will inject category buttons -->
+</div>
+
+  <!-- Layout -->
+  <div class="main-layout">
+
+    <!-- Sidebar -->
+    <div class="side-tab" id="bestCollegeSidebar">
+      <!-- JS will inject best colleges here -->
+    </div>
+
+    <!-- Main College List -->
+    <div class="college-list" id="collegeList">
+      <!-- JS will inject college cards here -->
+    </div>
+
+  </div>
+
+</div>
+
+<!-- JavaScript -->
+<script src="colleges.js"></script>
+
+</body>
+</html>

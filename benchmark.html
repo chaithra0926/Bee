@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrow | Career Aptitude Test</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* --- 1. GLOBAL STYLES --- */
+        :root { 
+            --primary: #2563eb; 
+            --bg: #f3f4f6; 
+            --sidebar-bg: #0f172a;
+            --text-dark: #1e293b;
+        }
+        
+        * { box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background: var(--bg); 
+            margin: 0; 
+            display: flex; 
+            color: var(--text-dark);
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* --- 2. SIDEBAR --- */
+        .sidebar { 
+            width: 250px; 
+            background: var(--sidebar-bg); 
+            color: white; 
+            height: 100%; 
+            display: flex; 
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+
+        .sidebar-header { 
+            padding: 30px 25px; 
+            border-bottom: 1px solid #1e293b; 
+        }
+        
+        .sidebar-header h3 { margin: 0; font-size: 1.5rem; }
+
+        .nav-links { flex: 1; padding-top: 20px; }
+
+        .nav-item { 
+            display: flex; 
+            align-items: center;
+            padding: 15px 25px; 
+            color: #94a3b8; 
+            text-decoration: none; 
+            transition: 0.3s; 
+            cursor: pointer;
+            font-size: 0.95rem;
+            border-left: 4px solid transparent;
+        }
+        
+        .nav-item:hover, .nav-item.active { 
+            background: #1e293b; 
+            color: white; 
+            border-left: 4px solid var(--primary); 
+        }
+        
+        .nav-item i { width: 30px; }
+
+        /* --- 3. MAIN CONTENT --- */
+        .main-content {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+        }
+        
+        .placeholder-box {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* --- 4. MODAL (POPUP QUIZ) --- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(3px);
+        }
+
+        .modal-box {
+            background: white;
+            width: 90%;
+            max-width: 700px;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            position: relative;
+            animation: slideUp 0.3s ease-out;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px; right: 20px;
+            font-size: 28px;
+            background: none; border: none;
+            cursor: pointer; color: #64748b;
+        }
+        .close-btn:hover { color: #ef4444; }
+
+        /* Career Grid */
+        .career-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .career-card {
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+            background: white;
+        }
+        .career-card:hover {
+            border-color: var(--primary);
+            background: #eff6ff;
+            transform: translateY(-3px);
+        }
+        .career-card i {
+            font-size: 24px;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* Question & Options */
+        .progress-container {
+            width: 100%; height: 6px; background: #e2e8f0; 
+            border-radius: 3px; margin: 15px 0 30px 0;
+        }
+        .progress-fill {
+            height: 100%; background: var(--primary); 
+            border-radius: 3px; width: 0%; transition: 0.3s;
+        }
+
+        .option-btn {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            background: white;
+            text-align: left;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+        }
+        .option-btn:hover {
+            border-color: var(--primary);
+            background: #f1f5f9;
+        }
+        .option-btn:before {
+            content: '';
+            width: 12px; height: 12px;
+            border: 2px solid #94a3b8;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        /* Results */
+        .result-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        .res-suitable { background: #ecfdf5; border-left: 6px solid #10b981; color: #064e3b; }
+        .res-moderate { background: #fffbeb; border-left: 6px solid #f59e0b; color: #78350f; }
+        .res-risk { background: #fef2f2; border-left: 6px solid #ef4444; color: #7f1d1d; }
+
+        .btn-restart {
+            width: 100%; padding: 12px;
+            background: var(--primary); color: white;
+            border: none; border-radius: 8px;
+            cursor: pointer; font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <h3>Arrow</h3>
+        </div>
+        <div class="nav-links">
+            <a href="#" class="nav-item">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fas fa-user-tie"></i> Experts
+            </a>
+            
+            <div class="nav-item active" onclick="openBenchmark()">
+                <i class="fas fa-chart-line"></i> Benchmark Analysis
+            </div>
+
+            <a href="#" class="nav-item">
+                <i class="fas fa-lightbulb"></i> Skills
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fas fa-question-circle"></i> Help
+            </a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="placeholder-box">
+            <h1>Welcome to Arrow</h1>
+            <p>Click "Benchmark Analysis" in the sidebar to start the Aptitude Test.</p>
+            <div style="font-size: 50px; color: #ccc; margin-top: 30px;">
+                <i class="fas fa-arrow-left"></i>
+            </div>
+        </div>
+    </main>
+
+    <div id="quizModal" class="modal-overlay">
+        <div class="modal-box">
+            <button class="close-btn" onclick="closeBenchmark()">&times;</button>
+
+            <div id="view-select">
+                <h2 style="margin-top:0;">Select Aptitude Test</h2>
+                <p>Choose a career to test your technical knowledge and aptitude:</p>
+                
+                <div class="career-grid">
+                    <div class="career-card" onclick="startQuiz('doctor')">
+                        <i class="fas fa-user-md"></i> Doctor
+                    </div>
+                    <div class="career-card" onclick="startQuiz('engineer')">
+                        <i class="fas fa-microchip"></i> Engineer
+                    </div>
+                    <div class="career-card" onclick="startQuiz('lawyer')">
+                        <i class="fas fa-gavel"></i> Lawyer
+                    </div>
+                    <div class="career-card" onclick="startQuiz('ca')">
+                        <i class="fas fa-calculator"></i> CA
+                    </div>
+                    <div class="career-card" onclick="startQuiz('cma')">
+                        <i class="fas fa-chart-pie"></i> CMA
+                    </div>
+                    <div class="career-card" onclick="startQuiz('acca')">
+                        <i class="fas fa-globe"></i> ACCA
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-question" style="display: none;">
+                <h3 id="q-title" style="margin:0; color: var(--primary);">Career Name</h3>
+                <div class="progress-container">
+                    <div id="q-progress" class="progress-fill"></div>
+                </div>
+                
+                <h2 id="q-text" style="font-weight: 500; font-size: 1.2rem; margin-bottom: 25px;">Question goes here?</h2>
+                
+                <div id="q-options">
+                    </div>
+            </div>
+
+            <div id="view-result" style="display: none;">
+                <div id="result-content" class="result-container"></div>
+                <button class="btn-restart" onclick="resetQuiz()">Take Another Test</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // --- 1. APTITUDE QUESTION DATABASE (10 Questions per career) ---
+        const careerDB = {
+            doctor: {
+                title: "Medical Aptitude",
+                skills: ["Biology", "Chemistry", "Anatomy", "Emergency Response"],
+                questions: [
+                    { q: "Which organ is primarily responsible for filtering blood?", options: ["Heart", "Liver", "Kidney", "Lungs"], correct: 2 },
+                    { q: "What is the universal blood donor type?", options: ["Type A", "Type B", "Type AB", "Type O Negative"], correct: 3 },
+                    { q: "How many bones are in the adult human body?", options: ["206", "250", "300", "196"], correct: 0 },
+                    { q: "Which of these is a symptom of dehydration?", options: ["Swelling", "Dry Mouth", "High Energy", "Pale Skin"], correct: 1 },
+                    { q: "What does CPR stand for?", options: ["Cardio Pulmonary Resuscitation", "Cardio Pulse Rescue", "Central Pump Rhythm", "Chest Pressure Release"], correct: 0 },
+                    { q: "Which vitamin is produced when skin is exposed to sunlight?", options: ["Vitamin C", "Vitamin D", "Vitamin A", "Vitamin B12"], correct: 1 },
+                    { q: "What is the normal human body temperature approx?", options: ["96°F", "98.6°F", "101°F", "92°F"], correct: 1 },
+                    { q: "Which cell carries oxygen in the blood?", options: ["White Blood Cell", "Platelet", "Red Blood Cell", "Plasma"], correct: 2 },
+                    { q: "Antibiotics are effective against:", options: ["Viruses", "Bacteria", "Allergies", "Genetic disorders"], correct: 1 },
+                    { q: "The 'Femur' is found in the:", options: ["Arm", "Spine", "Skull", "Thigh"], correct: 3 }
+                ]
+            },
+            engineer: {
+                title: "Engineering Aptitude",
+                skills: ["Mathematics", "Physics", "Spatial Reasoning", "Logic"],
+                questions: [
+                    { q: "If a gear turns clockwise, the gear meshed directly next to it turns:", options: ["Clockwise", "Counter-Clockwise", "Doesn't move", "Upwards"], correct: 1 },
+                    { q: "Which material is a good electrical conductor?", options: ["Rubber", "Wood", "Copper", "Glass"], correct: 2 },
+                    { q: "Calculate: 15% of 200.", options: ["20", "25", "30", "35"], correct: 2 },
+                    { q: "What is the unit of Force?", options: ["Joule", "Watt", "Newton", "Pascal"], correct: 2 },
+                    { q: "In binary code, what does '10' represent in decimal?", options: ["1", "2", "3", "10"], correct: 1 },
+                    { q: "A triangle has angles 90° and 40°. What is the third angle?", options: ["40°", "50°", "60°", "45°"], correct: 1 },
+                    { q: "Kinetic energy is related to an object's:", options: ["Height", "Motion", "Temperature", "Shape"], correct: 1 },
+                    { q: "Which structure is strongest against compression?", options: ["Triangle", "Square", "Rectangle", "Pentagon"], correct: 0 },
+                    { q: "If V=IR (Ohm's Law), and V=10, R=2, what is I?", options: ["20", "12", "8", "5"], correct: 3 },
+                    { q: "What does CPU stand for?", options: ["Central Process Unit", "Computer Power Unit", "Central Processing Unit", "Core Program Utility"], correct: 2 }
+                ]
+            },
+            lawyer: {
+                title: "Legal & Logical Aptitude",
+                skills: ["Logical Reasoning", "Verbal Ability", "Critical Thinking", "Civics"],
+                questions: [
+                    { q: "Complete the analogy: Judge is to Court as Doctor is to:", options: ["Patient", "Hospital", "Medicine", "Nurse"], correct: 1 },
+                    { q: "'Habeas Corpus' is a legal term related to:", options: ["Property Tax", "Unlawful Detention", "Contract Breach", "Marriage"], correct: 1 },
+                    { q: "If All A are B, and All B are C, then:", options: ["All A are C", "Some A are not C", "No A are C", "All C are A"], correct: 0 },
+                    { q: "Which document is the supreme law of India?", options: ["The Penal Code", "The Constitution", "Parliament Act", "Supreme Court Order"], correct: 1 },
+                    { q: "A person who files a lawsuit is called the:", options: ["Defendant", "Plaintiff", "Juror", "Bailiff"], correct: 1 },
+                    { q: "What does 'Pro Bono' mean?", options: ["For free/public good", "Very expensive", "Professional", "By the law"], correct: 0 },
+                    { q: "Which comes first in a criminal trial?", options: ["Sentencing", "Opening Statement", "Closing Argument", "Verdict"], correct: 1 },
+                    { q: "Find the odd one out:", options: ["Theft", "Murder", "Arson", "Contract"], correct: 3 },
+                    { q: "Identify the assumption: 'He is rich, so he must be happy.'", options: ["Rich people are sad", "Money causes happiness", "Happiness is rare", "He is lucky"], correct: 1 },
+                    { q: "Perjury means:", options: ["Stealing money", "Lying under oath", "Breaking a contract", "Parking illegally"], correct: 1 }
+                ]
+            },
+            ca: {
+                title: "CA (Accountancy) Aptitude",
+                skills: ["Accounting", "Mathematics", "Data Interpretation", "Economics"],
+                questions: [
+                    { q: "Assets = Liabilities + ?", options: ["Revenue", "Expenses", "Equity/Capital", "Loan"], correct: 2 },
+                    { q: "Which is an intangible asset?", options: ["Building", "Cash", "Patent", "Inventory"], correct: 2 },
+                    { q: "What is the primary purpose of an audit?", options: ["To find fraud", "To verify financial statements", "To increase profit", "To hire staff"], correct: 1 },
+                    { q: "If a company buys a machine for cash, what happens?", options: ["Assets increase", "Assets decrease", "Assets remain same (shift)", "Liabilities increase"], correct: 2 },
+                    { q: "What is 'Depreciation'?", options: ["Increase in value", "Decrease in asset value", "Profit margin", "Tax refund"], correct: 1 },
+                    { q: "A Balance Sheet shows financial position at:", options: ["A period of time", "A specific point in time", "Future projection", "Past 5 years"], correct: 1 },
+                    { q: "Gross Profit = Sales - ?", options: ["Net Income", "COGS (Cost of Goods Sold)", "Tax", "Operating Expenses"], correct: 1 },
+                    { q: "Debit implies:", options: ["Increase in Liability", "Decrease in Asset", "Increase in Asset", "Increase in Income"], correct: 2 },
+                    { q: "What is GST?", options: ["Income Tax", "Goods and Services Tax", "Global Sales Tax", "Government Service Tax"], correct: 1 },
+                    { q: "ROI stands for:", options: ["Rate of Interest", "Return on Investment", "Risk on Insurance", "Revenue of India"], correct: 1 }
+                ]
+            },
+            cma: {
+                title: "CMA (Cost Mgmt) Aptitude",
+                skills: ["Cost Accounting", "Budgeting", "Analysis", "Management"],
+                questions: [
+                    { q: "Which is a 'Fixed Cost'?", options: ["Raw Materials", "Rent", "Electricity Bill", "Packaging"], correct: 1 },
+                    { q: "Break-even point is where:", options: ["Profit is max", "Loss is max", "Total Revenue = Total Cost", "Sales are zero"], correct: 2 },
+                    { q: "What is the main focus of CMA?", options: ["Tax filing", "Internal Management & Strategy", "External Auditing", "Legal compliance"], correct: 1 },
+                    { q: "Variance analysis compares:", options: ["Competitors", "Budget vs Actual", "Past vs Future", "Assets vs Liabilities"], correct: 1 },
+                    { q: "Opportunity cost is:", options: ["Money paid", "Benefit foregone of next best alternative", "Cost of raw material", "Sunk cost"], correct: 1 },
+                    { q: "Which is a direct material cost?", options: ["Factory cleaning", "Wood for a table", "Manager salary", "Security guard"], correct: 1 },
+                    { q: "Budgeting is primarily for:", options: ["Reporting to government", "Planning and Control", "Calculating tax", "Shareholders"], correct: 1 },
+                    { q: "JIT stands for:", options: ["Just In Time", "Job In Training", "Joint Income Tax", "Jump In Total"], correct: 0 },
+                    { q: "Marginal Costing considers only:", options: ["Fixed Costs", "Variable Costs", "Sunk Costs", "All Costs"], correct: 1 },
+                    { q: "Supply Chain manages:", options: ["Only Sales", "Only Production", "Flow from Supplier to Customer", "Employee hiring"], correct: 2 }
+                ]
+            },
+            acca: {
+                title: "ACCA (Global Finance) Aptitude",
+                skills: ["IFRS", "Global Business", "Ethics", "Financial Reporting"],
+                questions: [
+                    { q: "Where is the headquarters of ACCA?", options: ["New York", "London", "Switzerland", "Dubai"], correct: 1 },
+                    { q: "IFRS stands for:", options: ["Indian Financial Rules", "International Financial Reporting Standards", "Internal Finance Revenue System", "International Fund Reserve"], correct: 1 },
+                    { q: "Which concept implies business will continue indefinitely?", options: ["Accrual", "Going Concern", "Consistency", "Materiality"], correct: 1 },
+                    { q: "Ethics in accounting primarily prevents:", options: ["Profit", "Tax", "Fraud & Manipulation", "Competition"], correct: 2 },
+                    { q: "A Multinational Corporation (MNC) operates in:", options: ["One city", "One state", "One country", "Multiple countries"], correct: 3 },
+                    { q: "The 'Big 4' accounting firms include:", options: ["Google, Amazon", "Deloitte, PwC, EY, KPMG", "TATA, Reliance", "Chase, HSBC"], correct: 1 },
+                    { q: "Dividends are paid to:", options: ["Employees", "Shareholders", "Suppliers", "Government"], correct: 1 },
+                    { q: "Which currency is the 'GBP'?", options: ["German Bond", "Great British Pound", "Global Bank Point", "Gold Bullion Price"], correct: 1 },
+                    { q: "Forex deals with:", options: ["Forestry", "Foreign Exchange", "Fixed Assets", "Forward Exports"], correct: 1 },
+                    { q: "Consolidated financial statements combine:", options: ["Parent & Subsidiary", "CEO & Manager", "Sales & Marketing", "Tax & Audit"], correct: 0 }
+                ]
+            }
+        };
+
+        // --- 2. STATE VARIABLES ---
+        let currentCareer = null;
+        let score = 0;
+        let qIndex = 0;
+
+        // --- 3. MODAL FUNCTIONS ---
+        function openBenchmark() {
+            document.getElementById('quizModal').style.display = 'flex';
+            resetQuiz();
+        }
+
+        function closeBenchmark() {
+            document.getElementById('quizModal').style.display = 'none';
+        }
+
+        // --- 4. QUIZ LOGIC FUNCTIONS ---
+        function startQuiz(careerKey) {
+            currentCareer = careerDB[careerKey];
+            score = 0; // Reset Score
+            qIndex = 0; // Reset Index
+            
+            // Switch View
+            document.getElementById('view-select').style.display = 'none';
+            document.getElementById('view-question').style.display = 'block';
+            
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const qData = currentCareer.questions[qIndex];
+            
+            // UI Updates
+            document.getElementById('q-title').innerText = currentCareer.title;
+            document.getElementById('q-text').innerText = `${qIndex + 1}. ${qData.q}`;
+            
+            // Progress Bar
+            const total = currentCareer.questions.length;
+            const percentage = ((qIndex + 1) / total) * 100;
+            document.getElementById('q-progress').style.width = percentage + "%";
+
+            // Generate Option Buttons
+            const optionsDiv = document.getElementById('q-options');
+            optionsDiv.innerHTML = ""; // Clear old buttons
+
+            qData.options.forEach((optText, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = optText;
+                btn.onclick = () => checkAnswer(i);
+                optionsDiv.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selectedIndex) {
+            const correctIndex = currentCareer.questions[qIndex].correct;
+            
+            if (selectedIndex === correctIndex) {
+                score += 10; // 10 Points for correct answer
+            }
+            // 0 Points for wrong answer (no penalty)
+
+            nextQuestion();
+        }
+
+        function nextQuestion() {
+            qIndex++;
+            if (qIndex < currentCareer.questions.length) {
+                loadQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            document.getElementById('view-question').style.display = 'none';
+            document.getElementById('view-result').style.display = 'block';
+            
+            const maxScore = currentCareer.questions.length * 10; // 100 points total
+            const finalPercent = (score / maxScore) * 100;
+            const resultBox = document.getElementById('result-content');
+            
+            let html = "";
+            let skillsList = currentCareer.skills.map(s => `<li>${s}</li>`).join("");
+
+            if (finalPercent >= 80) {
+                // EXCELLENT (Suitable)
+                resultBox.className = "result-container res-suitable";
+                html = `
+                    <h2 style="margin-top:0"><i class="fas fa-check-circle"></i> Excellent Score!</h2>
+                    <p>You scored <b>${finalPercent}%</b> (${score}/${maxScore}).</p>
+                    <p>You show strong aptitude for <b>${currentCareer.title}</b>.</p>
+                    <hr style="opacity:0.2">
+                    <h4>Key Skills You Possess:</h4>
+                    <ul>${skillsList}</ul>
+                `;
+            } else if (finalPercent >= 40) {
+                // MODERATE
+                resultBox.className = "result-container res-moderate";
+                html = `
+                    <h2 style="margin-top:0"><i class="fas fa-exclamation-circle"></i> Good Effort</h2>
+                    <p>You scored <b>${finalPercent}%</b> (${score}/${maxScore}).</p>
+                    <p>You have potential, but need to improve your technical fundamentals.</p>
+                    <hr style="opacity:0.2">
+                    <h4>Focus Areas for Improvement:</h4>
+                    <ul>${skillsList}</ul>
+                `;
+            } else {
+                // LOW (Risk)
+                resultBox.className = "result-container res-risk";
+                html = `
+                    <h2 style="margin-top:0"><i class="fas fa-times-circle"></i> Needs Improvement</h2>
+                    <p>You scored <b>${finalPercent}%</b> (${score}/${maxScore}).</p>
+                    <p>The aptitude required for <b>${currentCareer.title}</b> appears challenging for you right now.</p>
+                    <hr style="opacity:0.2">
+                    <h4>Suggested Action:</h4>
+                    <p>Review the basics of this field or consider exploring other career options that match your strengths.</p>
+                `;
+            }
+
+            resultBox.innerHTML = html;
+        }
+
+        function resetQuiz() {
+            document.getElementById('view-result').style.display = 'none';
+            document.getElementById('view-question').style.display = 'none';
+            document.getElementById('view-select').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

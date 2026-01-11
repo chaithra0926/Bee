@@ -1,0 +1,69 @@
+/* 1. Reset & Fonts - Using a clean sans-serif similar to the screenshot */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* 2. Body - Dark Navy Background & Centering */
+body {
+  background-color: #13161c; /* Dark background from screenshot */
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+}
+
+/* 3. Card Container - The floating box */
+.card {
+  background-color: #1e232e; /* Slightly lighter card background */
+  padding: 40px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Deep shadow */
+}
+
+/* 4. Heading Style */
+h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.subtitle {
+  color: #8b9bb4; /* Muted text color */
+  margin-bottom: 30px;
+  font-size: 0.95rem;
+}
+
+/* 5. Category Buttons */
+/* styled to look like the input fields initially, then light up like the button */
+.category-option {
+  background-color: #272c38; /* Dark field color */
+  color: #c4c9d4;
+  padding: 18px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+/* Hover Effect - transform into the "Sign In" button style */
+.category-option:hover {
+  background-color: #5b50e6; /* The purple accent color */
+  color: #ffffff;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(91, 80, 230, 0.4);
+}
+
+.category-option:active {
+  transform: translateY(0);
+}

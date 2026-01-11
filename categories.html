@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Arrow | Categories</title>
+  <link rel="stylesheet" href="categories.css">
+</head>
+
+<body>
+
+  <div class="card">
+    
+    <h2>Choose Category</h2>
+    <p class="subtitle">Select your stream to continue</p>
+
+    <div class="category-option" onclick="selectCategory('arts')">Arts</div>
+    <div class="category-option" onclick="selectCategory('science')">Science</div>
+    <div class="category-option" onclick="selectCategory('commerce')">Commerce</div>
+
+  </div>
+
+  <script>
+    function selectCategory(category) {
+      // console.log("Clicked: " + category); 
+      localStorage.setItem("selectedCategory", category);
+      window.location.href = "careers.html";
+    }
+  </script>
+
+</body>
+</html>
