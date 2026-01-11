@@ -45,29 +45,116 @@ Student self-assessment,Industry-aligned skill requirements
 ## ⚙️ Technology Stack
 
 List the tools and technologies used:
-- Programming Languages  
+- Programming Languages  -HTML, CSS, JavaScript  
 - Frameworks / Libraries  
-- Tools / Platforms  
+- Tools / Platforms  - firebase
 
-Example:
-- HTML, CSS, JavaScript  
-- React / Flutter / Node.js  
-- Firebase / APIs (if any)
+
+
 
 ---
 
 ## 🖥️ Implementation Details
 
 Explain how your project works:
-- Overall workflow
-- Key features implemented
+- Overall workflow -4
+
+User Authentication
+
+The user first lands on the login/signup page
+
+Authentication is handled using Firebase Email & Password
+
+Only authenticated users can access the platform
+
+User Profile Collection
+
+After login, the user enters personal and academic details
+(name, age, interests, education background, etc.)
+
+These details are stored securely in Firebase Firestore
+
+Career Category Selection
+
+The system displays three main domains:
+
+Arts
+
+Science
+
+Commerce
+
+Each category occupies the full screen for better user focus
+
+Career Exploration
+
+On selecting a category, users see career options
+
+Example:
+
+Science → Doctor, Engineer
+
+Commerce → CA, CMA
+
+Arts → Lawyer, Teacher
+
+Each career shows:
+
+Required qualifications
+
+Eligibility criteria
+
+Syllabus & Roadmap View
+
+Selecting a career displays:
+
+Complete syllabus
+
+Learning path / preparation steps
+
+Helps students understand what lies ahead before choosing a career
+
+Logout & Session Handling
+
+Users can log out securely
+
+Firebase manages session persistence
+- Key features implemented -Secure Login System
+
+Firebase Authentication
+
+Prevents unauthorized access
+
+📊 Structured Career Guidance
+
+Careers grouped into clear categories
+
+Avoids confusion and random choices
+
+🧭 Syllabus Transparency
+
+Shows actual syllabus for each career
+
+Reduces mismatch between expectations and reality
+
+💾 Cloud Data Storage
+
+User details stored in Firebase Firestore
+
+No local data loss
+
+📱 Beginner-Friendly UI
+
+Simple navigation
+
+Mobile and desktop responsive design
 - Any challenges faced and how you solved them
 
 ---
 
 ## 📂 Project Structure
 
-
+The project is structured as a simple, modular web application using HTML, CSS, JavaScript, and Firebase. The front end consists of separate pages for login, user details, home, category selection, career options, and syllabus display, each designed to guide the user step by step. HTML handles the page structure, CSS is used for consistent styling and responsiveness, and JavaScript manages page navigation, user interactions, and data flow. Firebase Authentication is used for secure user login, while Firebase Firestore stores user details and related data in the cloud. The logic is kept beginner-friendly by using minimal JavaScript files with clear functions, and all pages are connected through controlled redirects to ensure only authenticated users can access the main features of the website.
 ---
 
 ## 🧪 Screenshots / Demo
