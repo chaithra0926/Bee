@@ -162,8 +162,8 @@ The project is structured as a simple, modular web application using HTML, CSS, 
 Add screenshots of your website or application inside the `screenshots/` folder.
 
 Mention them here:
-- Screenshot 1 – Description  
-- Screenshot 2 – Description  
+- Screenshot 1 – login page  
+- Screenshot 2 – category page 
 
 *(Screenshots are mandatory for evaluation)*
 
